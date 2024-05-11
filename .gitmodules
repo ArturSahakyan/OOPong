@@ -1,0 +1,3 @@
+[submodule "OOP Pong/ThirdParty/GLFW"]
+	path = OOP Pong/ThirdParty/GLFW
+	url = https://github.com/TheCherno/glfw
