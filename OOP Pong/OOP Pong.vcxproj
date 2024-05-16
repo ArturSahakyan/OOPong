@@ -134,7 +134,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Graphics\GraphicsKit.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Platform\Windows\WinGraphicsKit.h" />
+    <ClCompile Include="src\Engine\Graphics\Platform\Windows\WinGraphicsKit.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Window\RenderWindow.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Window\Window.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Platform\Windows\Win32WindowIMP.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ThirdParty\GLFW\GLFW.vcxproj">
@@ -143,6 +150,14 @@
     <ProjectReference Include="ThirdParty\Glad\Glad.vcxproj">
       <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Engine\Graphics\GraphicsKit.h" />
+    <ClInclude Include="src\Engine\Graphics\Window\RenderWindow.h" />
+    <ClInclude Include="src\Engine\Graphics\Platform\WindowIMP.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Engine\Graphics\Window\Window.h" />
+    <ClInclude Include="src\Engine\Graphics\Platform\Windows\Win32WindowIMP.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
