@@ -107,6 +107,8 @@ namespace PG {
 		wglMakeCurrent(dc, rc);
 		gladLoadGLLoader((GLADloadproc)get_proc);
 		glViewport(0, 0, 800, 600);
+
+
 		m_props = props;
 		delete class_name;
 	}
