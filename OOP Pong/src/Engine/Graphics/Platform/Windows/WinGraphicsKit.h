@@ -8,10 +8,13 @@
 
 namespace PG {
 	class WinGraphicsKit : public GraphicsKit {
+	private:
+		static WinGraphicsKit* s_instance;
+
 	public:
 		WindowIMP* CreateWindowIMP() override;
 
-		static GraphicsKit* CreateInstance();
+		static GraphicsKit* Instance();
 	};
 }
 

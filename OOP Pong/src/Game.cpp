@@ -22,12 +22,16 @@ void Game::initSystems() {
 		return;
 
 	// Initialize Systems
-
+	m_window = PG::RenderWindow();
 }
 
 void Game::initProps() {
-	PG::GraphicsKit* graphicsKit = PG::GraphicsKit::CreateInstance();
-	graphicsKit->CreateWindowIMP();
+	PG::WindowProps wd; // Window Descriptor
+	wd.title = "Pong Game";
+	wd.width = 1080;
+	wd.height = 720;
+
+	m_window.open(wd);
 }
 
 void Game::shutDownSystems() {
@@ -38,7 +42,11 @@ void Game::shutDownSystems() {
 void Game::gameLoop() {
 	m_isRunning = true;
 	while (m_isRunning) {
-		
+		m_window.clear();
+
+
+
+		m_window.update();
 	}
 }
 

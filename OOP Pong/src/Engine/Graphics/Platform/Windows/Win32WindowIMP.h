@@ -3,12 +3,51 @@
 
 #include "../WindowIMP.h"
 
+#ifdef PG_PLATFORM_WINDOWS
+#include <glad/glad.h>
+#include <Windows.h>
+
+
 namespace PG {
 
-	class Win32WindowIMP : public WindowIMP {
+	LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+	class Win32WindowIMP : public WindowIMP {
+	private:
+		HINSTANCE m_hInstance;
+		HWND m_hWnd;
+
+	private:
+		wchar_t* convertToWideChar(const std::string&);
+
+	public:
+		Win32WindowIMP();
+		~Win32WindowIMP();
+
+		void open(const WindowProps&) override;
+		void close() override;
+
+		void clear() override;
+		void handleEvents() override;
 	};
 
 }
+
+#else
+namespace PG {
+	// This Class Will Never Get Created Anyway
+	class Win32WindowIMP : public WindowIMP {
+	public:
+		Win32WindowIMP() {}
+		~Win32WindowIMP() {}
+
+		void open(const WindowProps&) {}
+		void close() {}
+
+		void clear() {}
+		void handleEvents() {}
+	};
+}
+#endif
 
 #endif

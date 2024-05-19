@@ -3,11 +3,18 @@
 #include "./Platform/Windows/WinGraphicsKit.h"
 
 namespace PG {
-	GraphicsKit* GraphicsKit::CreateInstance() {
+	GraphicsKit* GraphicsKit::s_instance = nullptr;
+
+	GraphicsKit* GraphicsKit::Instance() {
+		if (GraphicsKit::s_instance != 0)
+			return GraphicsKit::s_instance;
+
 #ifdef PG_PLATFORM_WINDOWS
-		return new WinGraphicsKit;
+		GraphicsKit::s_instance = WinGraphicsKit::Instance();
 #else
-		return;
+		return nullptr;
 #endif
+
+		return GraphicsKit::s_instance;
 	}
 }

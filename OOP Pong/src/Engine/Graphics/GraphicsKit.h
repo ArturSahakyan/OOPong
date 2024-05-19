@@ -6,11 +6,13 @@
 namespace PG {
 
 	class GraphicsKit {
+	private:
+		static GraphicsKit* s_instance;
 
 	public:
 		virtual WindowIMP* CreateWindowIMP() = 0;
 
-		static GraphicsKit* CreateInstance();
+		static GraphicsKit* Instance();
 	};
 
 }

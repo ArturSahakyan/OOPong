@@ -7,8 +7,7 @@ namespace PG {
 
 	class RenderWindow: public Window
 	{
-
-
+	public:
 	};
 
 }

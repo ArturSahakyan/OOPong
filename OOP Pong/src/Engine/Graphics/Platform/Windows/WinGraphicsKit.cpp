@@ -1,12 +1,13 @@
 #include "WinGraphicsKit.h"
 
 namespace PG {
-	WindowIMP* WinGraphicsKit::CreateWindowIMP() { 
-		printf("You're on a Windows Window!");
-		return nullptr; 
+	WinGraphicsKit* WinGraphicsKit::s_instance = nullptr;
+
+	WindowIMP* WinGraphicsKit::CreateWindowIMP() {
+		return new Win32WindowIMP; 
 	}
 
-	GraphicsKit* WinGraphicsKit::CreateInstance() {
-		return nullptr;
+	GraphicsKit* WinGraphicsKit::Instance() {
+		return (WinGraphicsKit::s_instance != nullptr) ? WinGraphicsKit::s_instance : new WinGraphicsKit;
 	}
 }
