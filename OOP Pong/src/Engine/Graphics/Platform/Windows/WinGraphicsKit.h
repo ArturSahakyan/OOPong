@@ -3,6 +3,7 @@
 
 #include "../../GraphicsKit.h"
 #include "Win32WindowIMP.h"
+#include "../OpenGL/OpenGLWindowsContext.h"
 
 #include <iostream>
 
@@ -13,6 +14,8 @@ namespace PG {
 
 	public:
 		WindowIMP* CreateWindowIMP() override;
+		WindowContextIMP* CreateWindowContextIMP() override;
+
 
 		static GraphicsKit* Instance();
 	};

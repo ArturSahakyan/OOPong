@@ -4,9 +4,7 @@
 #include "../WindowIMP.h"
 
 #ifdef PG_PLATFORM_WINDOWS
-#include <glad/glad.h>
 #include <Windows.h>
-
 
 namespace PG {
 
@@ -27,7 +25,8 @@ namespace PG {
 		void open(const WindowProps&) override;
 		void close() override;
 
-		void clear() override;
+		void* getWindowHandle() override;
+
 		void handleEvents() override;
 	};
 
@@ -44,10 +43,11 @@ namespace PG {
 		void open(const WindowProps&) {}
 		void close() {}
 
-		void clear() {}
+		void* getWindowHandle() { return nullptr; }
+
 		void handleEvents() {}
 	};
 }
 #endif
 
-#endif
+#endif // WIN32WINDOWIMP_H

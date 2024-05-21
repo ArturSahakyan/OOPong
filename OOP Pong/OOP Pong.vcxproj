@@ -134,9 +134,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Graphics\Platform\OpenGL\OpenGLWindowsContext.cpp" />
     <ClCompile Include="src\Engine\Graphics\GraphicsKit.cpp" />
     <ClCompile Include="src\Engine\Graphics\Platform\Windows\WinGraphicsKit.h" />
     <ClCompile Include="src\Engine\Graphics\Platform\Windows\WinGraphicsKit.cpp" />
+    <ClCompile Include="src\Engine\Graphics\WindowContext\WindowContext.cpp" />
     <ClCompile Include="src\Engine\Graphics\Window\RenderWindow.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -152,9 +154,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Graphics\Platform\OpenGL\OpenGLWindowsContext.h" />
     <ClInclude Include="src\Engine\Graphics\GraphicsKit.h" />
+    <ClInclude Include="src\Engine\Graphics\Platform\WindowContextIMP.h" />
     <ClInclude Include="src\Engine\Graphics\Window\RenderWindow.h" />
     <ClInclude Include="src\Engine\Graphics\Platform\WindowIMP.h" />
+    <ClInclude Include="src\Engine\Graphics\WindowContext\WindowContext.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Engine\Graphics\Window\Window.h" />
     <ClInclude Include="src\Engine\Graphics\Platform\Windows\Win32WindowIMP.h" />

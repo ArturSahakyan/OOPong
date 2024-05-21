@@ -1,24 +1,10 @@
 #include "Win32WindowIMP.h"
 
+#include "../../GraphicsKit.h"
+
 #ifdef PG_PLATFORM_WINDOWS
 
 namespace PG {
-
-	// Grabs OpenGL Func Addresses for Windows Machines
-	void* get_proc(const char* name) {
-		void* p = (void*)wglGetProcAddress(name); // load newer functions via wglGetProcAddress
-		if (p == 0 ||
-			(p == (void*)0x1) || (p == (void*)0x2) || (p == (void*)0x3) ||
-			(p == (void*)-1)) // does it return NULL - i.e. is the function not found?
-		{
-			// could be an OpenGL 1.1 function
-			HMODULE module = LoadLibraryA("opengl32.dll");
-			p = (void*)GetProcAddress(module, name); // then import directly from GL lib
-		}
-
-		return p;
-	}
-
 
 	// TODO: Create Event Handler
 	LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -37,12 +23,16 @@ namespace PG {
 
 	Win32WindowIMP::Win32WindowIMP()
 		: m_hInstance(GetModuleHandle(nullptr)), m_hWnd(HWND())
-	{}
+	{
+	}
 
 	Win32WindowIMP::~Win32WindowIMP() {
 		this->close();
 	}
 
+	void* Win32WindowIMP::getWindowHandle() {
+		return &m_hWnd;
+	}
 
 	void Win32WindowIMP::open(const WindowProps& props) {
 		const wchar_t* class_name = this->convertToWideChar(props.title); // Convert to Wide String
@@ -80,35 +70,6 @@ namespace PG {
 
 		ShowWindow(m_hWnd, SW_SHOW);
 
-		// TODO: Clean This Up
-		HDC dc = GetDC(m_hWnd);
-
-		PIXELFORMATDESCRIPTOR descriptor;
-
-		ZeroMemory(&descriptor, sizeof(descriptor));
-
-		descriptor.nSize = sizeof(descriptor);
-		descriptor.nVersion = 1;
-		descriptor.dwFlags = PFD_DRAW_TO_WINDOW | PFD_DRAW_TO_BITMAP | PFD_SUPPORT_OPENGL | PFD_GENERIC_ACCELERATED | PFD_DOUBLEBUFFER | PFD_SWAP_LAYER_BUFFERS;
-		descriptor.iPixelType = PFD_TYPE_RGBA;
-		descriptor.cColorBits = 32;
-		descriptor.cRedBits = 8;
-		descriptor.cGreenBits = 8;
-		descriptor.cBlueBits = 8;
-		descriptor.cAlphaBits = 8;
-		descriptor.cDepthBits = 32;
-		descriptor.cStencilBits = 8;
-
-		int pixel_format = ChoosePixelFormat(dc, &descriptor);
-		SetPixelFormat(dc, pixel_format, &descriptor);
-
-		// TODO: Get Rid of OpenGL Code
-		HGLRC rc = wglCreateContext(dc);
-		wglMakeCurrent(dc, rc);
-		gladLoadGLLoader((GLADloadproc)get_proc);
-		glViewport(0, 0, 800, 600);
-
-
 		m_props = props;
 		delete class_name;
 	}
@@ -119,22 +80,12 @@ namespace PG {
 		delete name;
 	}
 
-
-	void Win32WindowIMP::clear() {
-		// TODO: Don't Override This? & Get Rid of OpenGL code
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
-
 	void Win32WindowIMP::handleEvents() {
 		MSG msg = {};
 		while (PeekMessage(&msg, nullptr, 0u, 0u, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-
-		// TODO: Pull This?
-		SwapBuffers(GetDC(m_hWnd));
 	}
 
 	wchar_t* Win32WindowIMP::convertToWideChar(const std::string& str) {

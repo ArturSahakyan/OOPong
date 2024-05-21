@@ -2,12 +2,14 @@
 #define WINDOW_H
 
 #include "../Platform/WindowIMP.h"
+#include "../WindowContext/WindowContext.h"
 
 namespace PG {
 
 	class Window {
 	protected:
 		WindowIMP* m_window;
+		WindowContext m_context;
 
 	protected:
 		void handleEvents();

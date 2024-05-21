@@ -2,6 +2,7 @@
 #define GRAPHICSKIT_H
 
 #include "./Platform/WindowIMP.h"
+#include "./Platform/WindowContextIMP.h"
 
 namespace PG {
 
@@ -11,6 +12,7 @@ namespace PG {
 
 	public:
 		virtual WindowIMP* CreateWindowIMP() = 0;
+		virtual WindowContextIMP* CreateWindowContextIMP() = 0;
 
 		static GraphicsKit* Instance();
 	};

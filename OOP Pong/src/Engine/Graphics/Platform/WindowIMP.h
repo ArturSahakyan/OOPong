@@ -21,12 +21,12 @@ namespace PG {
 		WindowIMP() {}
 		virtual ~WindowIMP() {}
 
-		virtual void clear() = 0;
-
 		virtual void handleEvents() = 0;
 
 		virtual void open(const WindowProps&) = 0;
 		virtual void close() = 0;
+
+		virtual void* getWindowHandle() = 0;
 	};
 
 }
